@@ -1,8 +1,8 @@
+const generateUniqueId = require('../utils/generateUniqueId')
+
 // importa conexao com o banco de dados q está no arquivo connection
 const connection = require('../database/connection')
 
-// importa biblioteca para criar id criptografado
-const crypto = require('crypto')
 
 module.exports = {
     // método que retorna todas as ongs
@@ -20,7 +20,7 @@ module.exports = {
         const { name, email, whatsapp, city, uf } = req.body
     
         // cria id criptografado com 4 butes transformando em hexadecimal 
-        const id = crypto.randomBytes(4).toString('HEX')
+        const id = generateUniqueId()
     
         // await - faz o node aguardar esse bloco de código finalizar para então continuar 
         await connection('ongs').insert({
