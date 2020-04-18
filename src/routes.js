@@ -11,6 +11,70 @@ const SessionController = require('./controllers/SessionController')
 // importa rotas
 const routes = express.Router()
 
+/**
+ *** Exemplo básico de uma rota: ***
+ * 
+ * app.get('/', (req, res ) => {
+ *	return res.send(' Hello World ')
+ * })
+ *
+ *** ou retorna um json ***
+ *
+ * app.get('/', (req, res ) => {
+ *  return res.json({
+ * 	  evento: 'Semana Omnistack 11',
+ *		aluno: 'Dimitri Marchetti'
+ *  })
+ * })
+ * 
+ * 
+ *** Tipos de Parâmetros: ***
+ * 
+ *** Query Params: Parâmetros nomeados enviados na rota após '?' (filtros, paginação). A requisição tem q vir na url como users?name=Dimitri&idade=30
+ *
+ * const params = req.query
+ * 
+ * console.log(params)
+ * 
+ * app.get('/users', (req, res) => {
+ *  return res.json({
+ *    evento: 'Semana Omnistack 11',
+ *    aluno: 'Dimitri Marchetti'    
+ *  })
+ * })
+ * 
+ *** Route Params: Parâmetros utilizados para identificar rotas (recursos)
+ * 
+ * const params = req.params
+ * 
+ * console.log(params)
+ * 
+ * app.get('/users/:id', (req, res) => {
+ *  return res.json({
+ *    evento: 'Semana Omnistack 11',
+ *    aluno: 'Dimitri Marchetti'    
+ *  })
+ * })
+ * 
+ *** Request Body: Corpo da requisição, utilizado para alterar ou criar recursos.
+ *
+ * no topo da página:
+ * app.use(express.json)
+ * 
+ * cons body = req.body
+ * 
+ * json no insomnia
+ * 
+ * console.log(body)
+ * 
+ * app.post('/users', (req, res) => {
+ *  return res.json({
+ *    evento: 'Semana Omnistack 11',
+ *    aluno: 'Dimitri Marchetti'    
+ *  })
+ * })
+ * 
+ * */
 
 routes.post('/sessions', celebrate({
   [Segments.BODY]: Joi.object().keys({
@@ -20,12 +84,6 @@ routes.post('/sessions', celebrate({
 
 // Rota get - retorna todas as ongs
 routes.get('/ongs', OngController.index)
-
-/*
- * Query
- * Route
- * Body
- */
 
 
 // Rota post - cria Ongs 
